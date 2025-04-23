@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMqConfig {
+    @Value("${rabbitmq.queue.name}")
+    private String queue;
+
     @Value("${rabbitmq.exchange.name}")
     private String exchange;
     @Value("${rabbitmq.routing.key}")
@@ -20,16 +23,16 @@ public class RabbitMqConfig {
     // This is a placeholder for RabbitMQ configuration.
     @Bean
     public Queue activityQueue() {
-        return new Queue("activity.queue", true);
+        return new Queue(queue, true);
     }
     @Bean
     public DirectExchange activityExchange() {
-        return new DirectExchange("fitness.exchange");
+        return new DirectExchange(exchange);
     }
 
     @Bean
     public Binding activityBinding(Queue activityQueue, DirectExchange activityExchange) {
-        return BindingBuilder.bind(activityQueue).to(activityExchange).with("activity.routing.key");
+        return BindingBuilder.bind(activityQueue).to(activityExchange).with(routingKey);
     }
 
     @Bean
