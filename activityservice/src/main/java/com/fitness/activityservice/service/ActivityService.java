@@ -23,6 +23,10 @@ public class ActivityService {
    private final UserValidationService userValidationService;
    private final RabbitTemplate rabbitTemplate;
 
+    @Value("${rabbitmq.exchange.name}")
+    private String exchange;
+    @Value("${rabbitmq.routing.key}")
+    private String routingKey;
 
 
   /*
