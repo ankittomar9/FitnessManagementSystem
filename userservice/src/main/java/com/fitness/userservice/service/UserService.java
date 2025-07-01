@@ -1,7 +1,4 @@
 package com.fitness.userservice.service;
-
-
-
 import com.fitness.userservice.dto.RegisterRequest;
 import com.fitness.userservice.dto.UserResponse;
 import com.fitness.userservice.model.User;
@@ -72,6 +69,7 @@ public class UserService {
 
     public Boolean existByUserId(String userId) {
         log.info("Calling User Validation API for userId: {}", userId);
-        return repository.existsById(userId);
+        //return repository.existsById(userId);
+        return repository.existsByKeycloakId(userId);
     }
 }
